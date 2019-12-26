@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Subcategory, Image
+from .models import Category, Subcategory, Image, Tag
 
 # Register your models here.
 
@@ -19,10 +19,18 @@ class ParentInline(admin.StackedInline):
     model = Category
     extra = 3
 
+class TagInline(admin.StackedInline):
+    model = Tag
+    extra = 3
+
+class ImageAdmin(admin.ModelAdmin):
+    list_display = [("name")]
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [("name")]
 
+class TagAdmin(admin.ModelAdmin):
+    list_display = [("name")]
 
 class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "parent_category")
@@ -31,3 +39,5 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Subcategory, SubcategoryAdmin)
+admin.site.register(Image, ImageAdmin)
+admin.site.register(Tag, TagAdmin)

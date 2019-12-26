@@ -21,6 +21,14 @@ class Subcategory(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=25)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 class Image(models.Model):
     name = models.CharField(max_length=200)
@@ -28,6 +36,7 @@ class Image(models.Model):
         Subcategory, on_delete=models.CASCADE)
     # tags = models.
     url = models.ImageField(upload_to='images')
+    tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return self.name
